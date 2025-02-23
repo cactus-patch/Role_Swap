@@ -1,0 +1,7 @@
+*\obj
+*\bin
+.config
+.settings
+.vs
+.sln
+Properties/Settings.settings
