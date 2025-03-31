@@ -2,6 +2,7 @@
 using System;
 using Exiled.Events.Handlers;
 using System.Collections.Generic;
+using Server = Exiled.Events.Handlers.Server;
 
 
 namespace RoleSwap
@@ -15,23 +16,25 @@ namespace RoleSwap
         public override Version RequiredExiledVersion => new(9, 5, 0);
         public static Plugin Instance;
 
-        public EventHandlers EventHandlers { get; private set; }
+        private EventHandlers eventHandlers;
 
         public override void OnEnabled()
         {
             Instance = this;
-            EventHandlers = new EventHandlers(this);
-            Exiled.Events.Handlers.Server.RoundStarted += EventHandlers.OnRoundStarted;
-            Exiled.Events.Handlers.Server.RoundEnded += EventHandlers.OnEndingRound;
+            eventHandlers = new EventHandlers(this);
+
+            Server.RoundStarted += eventHandlers.OnRoundStarted;
+            Server.RoundEnded += eventHandlers.OnEndingRound;
+            
             base.OnEnabled();
         }
 
         public override void OnDisabled()
         {
             Instance = null;
-            EventHandlers = new EventHandlers(null);
-            Exiled.Events.Handlers.Server.RoundStarted -= EventHandlers.OnRoundStarted;
-            Exiled.Events.Handlers.Server.RoundEnded -= EventHandlers.OnEndingRound;
+            eventHandlers = null;
+            Server.RoundStarted -= eventHandlers.OnRoundStarted;
+            Server.RoundEnded -= eventHandlers.OnEndingRound;
             base.OnDisabled();
         }
     }
