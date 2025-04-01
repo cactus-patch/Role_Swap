@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-
+using Exiled.Events.EventArgs;
 using Exiled.API.Features;
 using Enums = Exiled.API.Enums;
 using MEC;
 using PlayerRoles;
 using UnityEngine;
-using Metrics;
 using Exiled.Events.EventArgs.Server;
+using Exiled.Events.EventArgs.Player;
 
 namespace RoleSwap
 {
@@ -32,7 +31,6 @@ namespace RoleSwap
             Timing.KillCoroutines(scanningCoroutine); 
         }
 
-
         public IEnumerator<float> ScannerRoutine()
         {
             while (true)
@@ -51,7 +49,6 @@ namespace RoleSwap
                     {
                         if(human.Role.Team == Team.FoundationForces && human.IsCuffed)
                         {
-                            
                             human.Role.Set(Plugin.Instance.Config.FFEscape, Enums.SpawnReason.Escaped);
                             human.Position = new(7f, 992f, -42);
                         }
