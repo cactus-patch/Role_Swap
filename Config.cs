@@ -4,15 +4,21 @@ using PlayerRoles;
 
 namespace RoleSwap
 {
-    class Config : IConfig
+    public class Config : IConfig
     {
+        [Description("Whether or not the plugin is enabled")]
         public bool IsEnabled { get; set; } = true;
+
+        [Description("Whether or not debug messages will be shown")]
         public bool Debug { get; set; } = false;
-        
+
         [Description("The role that will be swapped when a detained NTF escapes")]
-        public RoleTypeId NTFEscape = RoleTypeId.ChaosConscript;
+        public RoleTypeId NTFEscape { get; set; } = RoleTypeId.ChaosConscript;
         
         [Description("The role that will be swapped when a detained Chaos Insurgency escapes")]
-        public RoleTypeId CIEscape = RoleTypeId.NtfPrivate;
+        public RoleTypeId CIEscape { get; set; } = RoleTypeId.NtfPrivate;
+
+        [Description("The Distance from the escape area that peope escape with")]
+        public float EscapeDistance { get; set; } = 3f;
     }
 }

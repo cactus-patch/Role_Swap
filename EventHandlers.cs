@@ -16,41 +16,48 @@ namespace RoleSwap
     {
         public Vector3 Escapepos = new(123f, 988f, 21f);
         public Plugin plugin;
+        private CoroutineHandle scanningCoroutine;
 
         public EventHandlers(Plugin plugin) => this.plugin = plugin;
 
-        internal void OnRoundStarted()
+        public void OnRoundStarted()
         {
+            
             Timing.RunCoroutine(ScannerRoutine());
+            
         }
 
-        internal void OnEndingRound() { Timing.KillCoroutines(); }
+        public void OnEndingRound(EndingRoundEventArgs ev) 
+        { 
+            Timing.KillCoroutines(scanningCoroutine); 
+        }
+
 
         public IEnumerator<float> ScannerRoutine()
         {
-            while(true)
+            while (true)
             {
                 yield return Timing.WaitForSeconds(.5f);
 
-                if(Round.isEnding) break;
+                if(Round.IsEnded) break;
 
-                foreach(Player human in Player.List.Where(x => !x.IsSCP && !x.IsNPC))
+                foreach(Player human in Player.List.Where(x => !x.IsScp))
                 {
-                    if(plugin.Instance.Config.Debug) 
+                    if(Plugin.Instance.Config.Debug) 
                     {
-                        Log.Info($"{player.Name} is at {player.Position} (Zone: {player.Zone})")
+                        Log.Info($"{human.DisplayNickname} is at {human.Position} (Zone: {human.Zone})");
                     }
-                    if(Vector3.Distance(human.Position, Escapepos) <= 10)
+                    if(Vector3.Distance(human.Position, Escapepos) <= Plugin.Instance.Config.EscapeDistance)
                     {
-                        if(human.isNTF && human.isCuffed)
+                        if((human.IsNTF || human.Role == RoleTypeId.FacilityGuard)&& human.IsCuffed)
                         {
                             human.Role.Set(Plugin.Instance.Config.NTFEscape, Enums.SpawnReason.Escaped);
-                            human.Position = new(136f, 996f, -47);
+                            human.Position = new(7f, 992f, -42);
                         }
                         else if(human.IsCHI && human.IsCuffed)
                         {
                             human.Role.Set(Plugin.Instance.Config.CIEscape, Enums.SpawnReason.Escaped);
-                            human.Position = new(7f, 992f, -42);
+                            human.Position = new(136f, 996f, -47);
                         }
                     }
                 }
