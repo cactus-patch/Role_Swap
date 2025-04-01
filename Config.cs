@@ -13,7 +13,7 @@ namespace RoleSwap
         public bool Debug { get; set; } = false;
 
         [Description("The role that will be swapped when a detained NTF escapes")]
-        public RoleTypeId NTFEscape { get; set; } = RoleTypeId.ChaosConscript;
+        public RoleTypeId FFEscape { get; set; } = RoleTypeId.ChaosConscript;
         
         [Description("The role that will be swapped when a detained Chaos Insurgency escapes")]
         public RoleTypeId CIEscape { get; set; } = RoleTypeId.NtfPrivate;

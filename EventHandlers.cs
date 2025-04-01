@@ -49,9 +49,10 @@ namespace RoleSwap
                     }
                     if(Vector3.Distance(human.Position, Escapepos) <= Plugin.Instance.Config.EscapeDistance)
                     {
-                        if((human.IsNTF || human.Role == RoleTypeId.FacilityGuard)&& human.IsCuffed)
+                        if(human.Role.Team == Team.FoundationForces && human.IsCuffed)
                         {
-                            human.Role.Set(Plugin.Instance.Config.NTFEscape, Enums.SpawnReason.Escaped);
+                            
+                            human.Role.Set(Plugin.Instance.Config.FFEscape, Enums.SpawnReason.Escaped);
                             human.Position = new(7f, 992f, -42);
                         }
                         else if(human.IsCHI && human.IsCuffed)
