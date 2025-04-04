@@ -21,14 +21,22 @@ namespace RoleSwap
 
         public void OnRoundStarted()
         {
-            
-            Timing.RunCoroutine(ScannerRoutine());
-            
+            Timing.RunCoroutine(ScannerRoutine());   
         }
 
         public void OnEndingRound(EndingRoundEventArgs ev) 
         { 
             Timing.KillCoroutines(scanningCoroutine); 
+        }
+
+        public override void OnCuffed(CuffedEventArgs ev)
+        {
+            ev.Target.IsGodModeEnabled = true;
+        }
+
+        public override void OnUncuffed(RemovedCuffedEventArgs ev)
+        {
+            ev.Target.IsGodModeEnabled = false;
         }
 
         public IEnumerator<float> ScannerRoutine()
