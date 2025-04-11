@@ -1,7 +1,5 @@
-﻿using Exiled.API.Features;
-using System;
-using Server = Exiled.Events.Handlers.Server;
-using Player = Exiled.Events.EventArgs.Player
+﻿using Server = Exiled.Events.Handlers.Server;
+using Player = Exiled.Events.EventArgs.Player;
 
 
 namespace RoleSwap

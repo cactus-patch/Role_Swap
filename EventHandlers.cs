@@ -14,10 +14,8 @@ namespace RoleSwap
     class EventHandlers
     {
         public Vector3 Escapepos = new(123f, 988f, 21f);
-        public Plugin plugin;
+        public Plugin? plugin;
         private CoroutineHandle scanningCoroutine;
-
-        public EventHandlers(Plugin plugin) => this.plugin = plugin;
 
         public void OnRoundStarted()
         {
@@ -65,6 +63,7 @@ namespace RoleSwap
                             human.Role.Set(Plugin.Instance.Config.CIEscape, Enums.SpawnReason.Escaped);
                             human.Position = new(136f, 996f, -47);
                         }
+                        SharedData.Escaped.Add(new Tuple<string, RoleTypeId?>(human.Nickname, (RoleTypeId?)human.PreviousRole));
                     }
                 }
             }
