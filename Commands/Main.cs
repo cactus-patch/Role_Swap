@@ -1,4 +1,5 @@
 using CommandSystem;
+using Exiled.Events.EventArgs.Player;
 
 namespace RoleSwap.Commands
 {
@@ -13,7 +14,7 @@ namespace RoleSwap.Commands
 
         public override void LoadGeneratedCommands()
         {
-            
+            RegisterCommand(Escaped.Instance);   
         }
     }
 }

@@ -3,5 +3,7 @@
 .config
 .settings
 .vs
+*\.vscode
 .sln
+.json
 Properties/Settings.settings

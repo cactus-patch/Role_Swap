@@ -8,6 +8,8 @@ using PlayerRoles;
 using UnityEngine;
 using Exiled.Events.EventArgs.Server;
 using Exiled.Events.EventArgs.Player;
+using PluginAPI.Events;
+using Exiled.API.Enums;
 
 namespace RoleSwap
 {
@@ -19,22 +21,13 @@ namespace RoleSwap
 
         public void OnRoundStarted()
         {
+
             Timing.RunCoroutine(ScannerRoutine());   
         }
 
         public void OnEndingRound(EndingRoundEventArgs ev) 
         { 
             Timing.KillCoroutines(scanningCoroutine); 
-        }
-
-        public override void OnCuffed(CuffedEventArgs ev)
-        {
-            ev.Target.IsGodModeEnabled = true;
-        }
-
-        public override void OnUncuffed(RemovedCuffedEventArgs ev)
-        {
-            ev.Target.IsGodModeEnabled = false;
         }
 
         public IEnumerator<float> ScannerRoutine()

@@ -1,7 +1,7 @@
 ﻿using Server = Exiled.Events.Handlers.Server;
 using Player = Exiled.Events.EventArgs.Player;
 
-
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 namespace RoleSwap
 {
     class Plugin : Plugin<Config>
@@ -11,9 +11,9 @@ namespace RoleSwap
         public override string Author => "Noobest1001";
         public override Version Version => new(1, 0, 0);
         public override Version RequiredExiledVersion => new(9, 5, 0);
-        public static Plugin Instance;
+        public static Plugin? Instance;
 
-        private EventHandlers eventHandlers;
+        private EventHandlers? eventHandlers;
 
         public override void OnEnabled()
         {
