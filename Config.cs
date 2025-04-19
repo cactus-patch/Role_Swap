@@ -20,8 +20,5 @@ namespace RoleSwap
 
         [Description("The Distance from the escape area that peope escape with")]
         public float EscapeDistance { get; set; } = 3f;
-
-        [Description("Weather or not detained people are immune to damage caused by other humans")]
-        public bool DetainedGodMode { get; set; } = false;
     }
 }

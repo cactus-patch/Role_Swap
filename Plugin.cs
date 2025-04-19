@@ -1,5 +1,6 @@
 ﻿using Server = Exiled.Events.Handlers.Server;
 using Player = Exiled.Events.EventArgs.Player;
+using Exiled.API.Features;
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 namespace RoleSwap
@@ -22,8 +23,6 @@ namespace RoleSwap
 
             Server.RoundStarted += eventHandlers.OnRoundStarted;
             Server.EndingRound += eventHandlers.OnEndingRound;
-            Player.Handcuffing += eventHandlers.OnCuffed;
-            Player.RemovedHandcuffs += eventHandlers.OnUncuffed;
 
 
             base.OnEnabled();
@@ -33,8 +32,6 @@ namespace RoleSwap
         {
             Server.RoundStarted -= eventHandlers.OnRoundStarted;
             Server.EndingRound -= eventHandlers.OnEndingRound;
-            Player.Handcuffing -= eventHandlers.OnCuffed;
-            Player.RemovedHandcuffs -= eventHandlers.OnUncuffed;
 
             Instance = null;
             eventHandlers = null;
