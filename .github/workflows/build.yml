@@ -1,0 +1,24 @@
+﻿name: build and upload
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ '*' ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9
+          cache: true
+      - run: curl -sSL https://ftp.lunarware.tech/randomrefs/refs.tar.gz | tar xvzf -
+      - run: dotnet restore RoleSwap.sln --locked-mode
+      - run: dotnet build RoleSwap.sln
+      - uses: actions/upload-artifact@v4.5.0
+        with:
+          path: bin/Debug/net48/ExtendedItems.dll
