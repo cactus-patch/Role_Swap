@@ -2,7 +2,6 @@
 using Player = Exiled.Events.EventArgs.Player;
 using Exiled.API.Features;
 
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
 namespace RoleSwap
 {
     class Plugin : Plugin<Config>
@@ -30,8 +29,8 @@ namespace RoleSwap
 
         public override void OnDisabled()
         {
-            Server.RoundStarted -= eventHandlers.OnRoundStarted;
-            Server.EndingRound -= eventHandlers.OnEndingRound;
+            Server.RoundStarted -= eventHandlers!.OnRoundStarted;
+            Server.EndingRound -= eventHandlers!.OnEndingRound;
 
             Instance = null;
             eventHandlers = null;
