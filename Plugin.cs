@@ -22,6 +22,7 @@ namespace RoleSwap
 
             Server.RoundStarted += eventHandlers.OnRoundStarted;
             Server.EndingRound += eventHandlers.OnEndingRound;
+            Server.RespawningTeam += eventHandlers.OnRespawningTeam;
 
 
             base.OnEnabled();
@@ -31,6 +32,7 @@ namespace RoleSwap
         {
             Server.RoundStarted -= eventHandlers!.OnRoundStarted;
             Server.EndingRound -= eventHandlers!.OnEndingRound;
+            Server.RespawningTeam -= eventHandlers.OnRespawningTeam;
 
             Instance = null;
             eventHandlers = null;
