@@ -9,7 +9,7 @@ namespace RoleSwap
         public override string Prefix => "Cactus-Patch";
         public override string Name => "Arrested Development";
         public override string Author => "Noobest1001";
-        public override Version Version => new(1, 0, 0);
+        public override Version Version => new(1, 1, 0);
         public override Version RequiredExiledVersion => new(9, 5, 0);
         public static Plugin? Instance;
 
@@ -22,7 +22,6 @@ namespace RoleSwap
 
             Server.RoundStarted += eventHandlers.OnRoundStarted;
             Server.EndingRound += eventHandlers.OnEndingRound;
-            Server.RespawningTeam += eventHandlers.OnRespawningTeam;
 
 
             base.OnEnabled();
@@ -32,7 +31,6 @@ namespace RoleSwap
         {
             Server.RoundStarted -= eventHandlers!.OnRoundStarted;
             Server.EndingRound -= eventHandlers!.OnEndingRound;
-            Server.RespawningTeam -= eventHandlers.OnRespawningTeam;
 
             Instance = null;
             eventHandlers = null;
